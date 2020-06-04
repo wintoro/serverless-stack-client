@@ -8,12 +8,12 @@ import {
     FormControl,
     ControlLabel,
     } from "react-bootstrap";
-    import LoaderButton from "../components/LoaderButton";
-    import { useFormFields } from "../libs/hooksLib";
-    import { onError } from "../libs/errorLib";
-    import "./ResetPassword.css";
+import LoaderButton from "../components/LoaderButton";
+import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
+import "./ResetPassword.css";
 
-    export default function ResetPassword() {
+export default function ResetPassword() {
     const [fields, handleFieldChange] = useFormFields({
         code: "",
         email: "",
@@ -31,9 +31,9 @@ import {
 
     function validateResetForm() {
         return (
-        fields.code.length > 0 &&
-        fields.password.length > 0 &&
-        fields.password === fields.confirmPassword
+            fields.code.length > 0 &&
+            fields.password.length > 0 &&
+            fields.password === fields.confirmPassword
         );
     }
 
@@ -43,11 +43,11 @@ import {
         setIsSendingCode(true);
 
         try {
-        await Auth.forgotPassword(fields.email);
-        setCodeSent(true);
+            await Auth.forgotPassword(fields.email);
+            setCodeSent(true);
         } catch (error) {
-        onError(error);
-        setIsSendingCode(false);
+            onError(error);
+            setIsSendingCode(false);
         }
     }
 
@@ -57,15 +57,15 @@ import {
         setIsConfirming(true);
 
         try {
-        await Auth.forgotPasswordSubmit(
-            fields.email,
-            fields.code,
-            fields.password
-        );
-        setConfirmed(true);
+            await Auth.forgotPasswordSubmit(
+                fields.email,
+                fields.code,
+                fields.password
+            );
+            setConfirmed(true);
         } catch (error) {
-        onError(error);
-        setIsConfirming(false);
+            onError(error);
+            setIsConfirming(false);
         }
     }
 
@@ -73,22 +73,22 @@ import {
         return (
         <form onSubmit={handleSendCodeClick}>
             <FormGroup bsSize="large" controlId="email">
-            <ControlLabel>Email</ControlLabel>
-            <FormControl
-                autoFocus
-                type="email"
-                value={fields.email}
-                onChange={handleFieldChange}
-            />
+                <ControlLabel>Email</ControlLabel>
+                <FormControl
+                    autoFocus
+                    type="email"
+                    value={fields.email}
+                    onChange={handleFieldChange}
+                />
             </FormGroup>
             <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            isLoading={isSendingCode}
-            disabled={!validateCodeForm()}
-            >
-            Send Confirmation
+                block
+                type="submit"
+                bsSize="large"
+                isLoading={isSendingCode}
+                disabled={!validateCodeForm()}
+                >
+                Send Confirmation
             </LoaderButton>
         </form>
         );
@@ -98,42 +98,42 @@ import {
         return (
         <form onSubmit={handleConfirmClick}>
             <FormGroup bsSize="large" controlId="code">
-            <ControlLabel>Confirmation Code</ControlLabel>
-            <FormControl
-                autoFocus
-                type="tel"
-                value={fields.code}
-                onChange={handleFieldChange}
-            />
-            <HelpBlock>
-                Please check your email ({fields.email}) for the confirmation code.
-            </HelpBlock>
+                <ControlLabel>Confirmation Code</ControlLabel>
+                <FormControl
+                    autoFocus
+                    type="tel"
+                    value={fields.code}
+                    onChange={handleFieldChange}
+                />
+                <HelpBlock>
+                    Please check your email ({fields.email}) for the confirmation code.
+                </HelpBlock>
             </FormGroup>
             <hr />
             <FormGroup bsSize="large" controlId="password">
-            <ControlLabel>New Password</ControlLabel>
-            <FormControl
-                type="password"
-                value={fields.password}
-                onChange={handleFieldChange}
-            />
+                <ControlLabel>New Password</ControlLabel>
+                <FormControl
+                    type="password"
+                    value={fields.password}
+                    onChange={handleFieldChange}
+                />
             </FormGroup>
             <FormGroup bsSize="large" controlId="confirmPassword">
-            <ControlLabel>Confirm Password</ControlLabel>
-            <FormControl
-                type="password"
-                value={fields.confirmPassword}
-                onChange={handleFieldChange}
-            />
+                <ControlLabel>Confirm Password</ControlLabel>
+                <FormControl
+                    type="password"
+                    value={fields.confirmPassword}
+                    onChange={handleFieldChange}
+                />
             </FormGroup>
             <LoaderButton
-            block
-            type="submit"
-            bsSize="large"
-            isLoading={isConfirming}
-            disabled={!validateResetForm()}
-            >
-            Confirm
+                block
+                type="submit"
+                bsSize="large"
+                isLoading={isConfirming}
+                disabled={!validateResetForm()}
+                >
+                Confirm
             </LoaderButton>
         </form>
         );

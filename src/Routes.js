@@ -26,9 +26,9 @@ export default function Routes() {
             <UnauthenticatedRoute  exact path="/signup">
                 <Signup />
             </UnauthenticatedRoute>
-            {/* <UnauthenticatedRoute exact path="/login/reset">
+            <UnauthenticatedRoute exact path="/login/reset">
                 <ResetPassword />
-            </UnauthenticatedRoute> */}
+            </UnauthenticatedRoute>
 
             <AuthenticatedRoute  exact path="/notes/new">
                 <NewNote />
